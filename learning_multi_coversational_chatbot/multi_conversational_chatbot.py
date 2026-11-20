@@ -4,15 +4,12 @@ from datetime import datetime, timezone
 # uuid4 creates a unique random ID for each new conversation.
 from uuid import uuid4
 
-import os
-
 # Streamlit creates the web interface and chat controls.
 import streamlit as st
 # load_dotenv reads secrets and configuration from a .env file.
 from dotenv import load_dotenv
 # ChatOpenAI is LangChain's wrapper for an OpenAI chat model.
-#from langchain_openai import ChatOpenAI
-from langchain_groq import ChatGroq
+from langchain_openai import ChatOpenAI
 # HumanMessage and AIMessage identify user and assistant messages for LangChain.
 from langchain_core.messages import AIMessage, HumanMessage
 # ChatPromptTemplate builds the prompt and MessagesPlaceholder inserts history.
@@ -114,7 +111,7 @@ def update_title_from_first_message(chat_id, text):
 # Load API credentials and settings from the .env file.
 load_dotenv()
 # Select gpt-5.5 and use temperature 0 for consistent, low-randomness replies.
-llm = ChatGroq(model="openai/gpt-oss-120b", api_key = os.getenv("GROQ_API_KEY"),temperature=0)
+llm = ChatOpenAI(model="gpt-5.5", temperature=0)
 # Build the prompt: system behavior, recent history, then the new human message.
 prompt = ChatPromptTemplate.from_messages([
     ("system", "You are a helpful assistant. Answer clearly and accurately."),
