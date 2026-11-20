@@ -1,8 +1,7 @@
 import streamlit as st
 
 from dotenv import load_dotenv
-#from langchain_openai import ChatOpenAI
-from langchain_groq import ChatGroq
+from langchain_openai import ChatOpenAI
 from langchain_core.messages import AIMessage, HumanMessage
 
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -12,7 +11,7 @@ st.title("Chatbot AI")
 
 # Load the API settings from the environment, then create the model client.
 load_dotenv()  # Load environment variables from .env file
-llm = ChatGroq(model_name="openai/gpt-oss-120b")
+llm = ChatOpenAI(model_name="gpt-5.5")
 
 # Build the conversation prompt from its fixed instructions, earlier turns,
 # and the new user input supplied for each request.
